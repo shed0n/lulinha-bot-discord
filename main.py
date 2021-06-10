@@ -8,10 +8,7 @@ import asyncio
 client = discord.Client()
 
 async def get_price():
-  response = requests.get("https://zenquotes.io/api/random")
-  json_data = json.loads(response.text)
-  quote = json_data[0]['q'] + " -" + json_data[0]['a']
-  response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
+  response = await req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
   jsonRes = response.json()
   value_response = jsonRes['price']
   value = float(value_response)
@@ -23,7 +20,7 @@ async def my_background_task():
     while not client.is_closed():
         ada_min = 1.20
         ada_max = 2
-        response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
+        response = await req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
         jsonRes = response.json()
         value_response = jsonRes['price']
         value = float(value_response)
