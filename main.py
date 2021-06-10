@@ -51,7 +51,7 @@ async def on_message(message):
 
   if message.content.startswith('!preço'):
     price = get_price()
-    await message.channel.send('Preço atual da ADA: %s' %value)
+    await message.channel.send('Preço atual da ADA: %s' %price)
         
 client.loop.create_task(my_background_task())
 client.run(os.getenv('TOKEN'))
