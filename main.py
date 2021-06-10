@@ -1,6 +1,3 @@
-#pip install --upgrade requests
-#pip install -U discord.py
-#pip install -U python-dotenv
 import requests as req
 import json
 import time
