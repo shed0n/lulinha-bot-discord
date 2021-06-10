@@ -47,7 +47,7 @@ async def on_message(message):
     return
 
   if message.content.startswith('!preço'):
-    price = await.get_price()
+    price = await get_price()
     await message.channel.send('Preço atual da ADA: %s' %price)
         
 client.loop.create_task(my_background_task())
