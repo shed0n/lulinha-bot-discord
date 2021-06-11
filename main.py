@@ -17,13 +17,15 @@ async def my_background_task():
     await client.wait_until_ready()
     channel = client.get_channel(811733009044733962)
     while not client.is_closed():
-        ada_min = 1.40
+        ada_min = 1.50
         ada_max = 2
         price = await get_price()
         if price >= ada_max or price <= ada_min:
             print("Sending Alert do Discord and Telegram")
             print("{:.2f}".format(price))
             await channel.send('ALERTA DE ADA: %s' %price)
+            ada_min = ada_min - 0.50
+            print("{:.2f}".format(ada_min))
             await asyncio.sleep(900) # task runs every 15 minutes
         else:
             print("{:.2f}".format(price))
