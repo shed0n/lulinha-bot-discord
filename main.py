@@ -18,7 +18,7 @@ async def my_background_task():
     await client.wait_until_ready()
     channel = client.get_channel(811733009044733962)
     while not client.is_closed():
-        ada_min = 1.20
+        ada_min = 1.40
         ada_max = 2
         response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
         jsonRes = response.json()
@@ -28,8 +28,8 @@ async def my_background_task():
         if value >= ada_max or value <= ada_min:
             print("Sending Alert do Discord and Telegram")
             print("{:.2f}".format(value))
-            await channel.send('@here ALERTA DE ADA: %s' %value)
-            await asyncio.sleep(300) # task runs every 300 seconds
+            await channel.send('ALERTA DE ADA: %s' %value)
+            await asyncio.sleep(900) # task runs every 15 minutes
         else:
             print("{:.2f}".format(value))
         await asyncio.sleep(30) # task runs every 30 seconds
