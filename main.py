@@ -1,6 +1,5 @@
 import requests as req
 import json
-import time
 import discord
 import os
 import asyncio
@@ -20,8 +19,8 @@ async def my_background_task():
     while not client.is_closed():
         ada_min = 1.40
         ada_max = 2
-        if value >= ada_max or value <= ada_min:
-            price = await get_price()
+        price = await get_price()
+        if price >= ada_max or price <= ada_min:
             print("Sending Alert do Discord and Telegram")
             print("{:.2f}".format(price))
             await channel.send('ALERTA DE ADA: %s' %price)
