@@ -13,27 +13,23 @@ async def get_price():
   value_response = jsonRes['price']
   value = float(value_response)
   return(value)
- 
+
 async def my_background_task():
     await client.wait_until_ready()
     channel = client.get_channel(811733009044733962)
     while not client.is_closed():
         ada_min = 1.40
         ada_max = 2
-        response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
-        jsonRes = response.json()
-        value_response = jsonRes['price']
-        value = float(value_response)
-
         if value >= ada_max or value <= ada_min:
+            price = await get_price()
             print("Sending Alert do Discord and Telegram")
-            print("{:.2f}".format(value))
-            await channel.send('ALERTA DE ADA: %s' %value)
+            print("{:.2f}".format(price))
+            await channel.send('ALERTA DE ADA: %s' %price)
             await asyncio.sleep(900) # task runs every 15 minutes
         else:
-            print("{:.2f}".format(value))
+            print("{:.2f}".format(price))
         await asyncio.sleep(30) # task runs every 30 seconds
-        
+
 @client.event
 async def on_ready():
     print('Logged in as {0.user}'.format(client))
@@ -46,6 +42,6 @@ async def on_message(message):
   if message.content.startswith('!preço'):
     price = await get_price()
     await message.channel.send('Preço atual da ADA: %s' %price)
-        
+
 client.loop.create_task(my_background_task())
 client.run(os.getenv('TOKEN'))
