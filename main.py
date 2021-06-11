@@ -28,7 +28,7 @@ async def my_background_task():
         if value >= ada_max or value <= ada_min:
             print("Sending Alert do Discord and Telegram")
             print("{:.2f}".format(value))
-            await channel.send('ALERTA DE ADA: %s' %value)
+            await channel.send('ALERTA DE ADA: %s' %{:.2f}".format(value))
             await asyncio.sleep(900) # task runs every 15 minutes
         else:
             print("{:.2f}".format(value))
@@ -45,7 +45,7 @@ async def on_message(message):
 
   if message.content.startswith('!preço'):
     price = await get_price()
-    await message.channel.send('Preço atual da ADA: %s' %price)
+    await message.channel.send('Preço atual da ADA: %s' %{:.2f}".format(price))
         
 client.loop.create_task(my_background_task())
 client.run(os.getenv('TOKEN'))
