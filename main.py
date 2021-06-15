@@ -27,7 +27,7 @@ async def send(price):
 async def my_background_task():
     await client.wait_until_ready()
     channel = client.get_channel(811733009044733962)
-    ada_min = 1.40
+    ada_min = 1.60
     ada_max = 2
     while not client.is_closed():
         price = await get_price()
