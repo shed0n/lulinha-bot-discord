@@ -39,7 +39,7 @@ async def my_background_task():
             print("{:.2f}".format(price))
             await channel.send('ALERTA DE ADA: %s' %price)
             await send(price)
-            ada_min = ada_min - 0.15
+            ada_max = ada_max + 0.10
             await asyncio.sleep(30) # task runs every 5 minutes
         else:
             print("{:.2f}".format(price))
