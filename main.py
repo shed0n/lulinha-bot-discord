@@ -20,13 +20,13 @@ async def get_price():
   value = float(value_response)
   return(value)
 
-# Send message to a Telegram group 
+# Send message to a Telegram group
 async def send(price):
     bot = telegram.Bot(token=telegram_token)
     print("Sending Alert to Telegram")
     bot.sendMessage(chat_id=group_id, text='ALERTA DE ADA: %s' %price)
 
-# Main task 
+# Main task
 async def my_background_task():
     await client.wait_until_ready()
     channel = client.get_channel(811733009044733962)
@@ -56,7 +56,7 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-  if message.content.startswith('!preço'):
+  if message.content.equals('!preço') || message.content.equals('!preco'):
     price = await get_price()
     await message.channel.send('Preço atual da ADA: %s' %price)
 
