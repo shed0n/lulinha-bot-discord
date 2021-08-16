@@ -56,7 +56,7 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-  if message.content.equals('!preço') || message.content.equals('!preco'):
+  if message.content == '!preço' || message.content == '!preco':
     price = await get_price()
     await message.channel.send('Preço atual da ADA: %s' %price)
 
