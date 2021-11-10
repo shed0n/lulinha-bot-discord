@@ -19,7 +19,7 @@ async def get_price():
   value_response = dict()
   response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=LRCUSDT')
   jsonResLRC = response.json()
-  value_response = {'ADA':jsonResADA['price'],'LRC':jsonResLRC['price']}
+  value_response = {'ADA':float(jsonResADA['price']),'LRC':float(jsonResLRC['price'])}
   return(value_response)
 
 # Send message to a Telegram group
