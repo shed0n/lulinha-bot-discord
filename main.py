@@ -16,7 +16,7 @@ client = discord.Client()
 async def get_price():
   response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
   jsonRes = response.json()
-  value_response = {}
+  value_response = dict()
   value_response.add("ADA",jsonRes['price'])
   value = float(value_response)
   response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=LRCUSDT')
