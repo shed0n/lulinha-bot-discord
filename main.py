@@ -75,7 +75,7 @@ async def on_message(message):
     price = await get_price()
     await message.channel.send('Preço atual da ADA: %s' %price['ADA'])
 
-  if message.content.lower() == '!LRC' or message.content.lower() == '!loopas':
+  if message.content.lower() == '!lrc' or message.content.lower() == '!loopas':
     price = await get_price()
     await message.channel.send('Preço atual do LRC: %s' %price['LRC'])
 
