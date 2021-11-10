@@ -40,23 +40,23 @@ async def my_background_task():
         price = await get_price()
         if price['ADA'] >= ada_max or price['ADA'] <= ada_min:
             print("Sending Alert to Discord")
-            print("{:.2f}".format(price))
-            await channel.send('ALERTA DE ADA: %s' %price)
-            await send(price)
+            print("{:.2f}".format(price['ADA']))
+            await channel.send('ALERTA DE ADA: %s' %price['ADA'])
+            await send(price['ADA'])
             ada_max = ada_max + 0.10
             await asyncio.sleep(30) # task runs every 5 minutes
         else:
-            print("{:.2f}".format(price))
+            print("{:.2f}".format(price['ADA']))
 
         if price['LRC'] >= ada_max or price['LRC'] <= ada_min:
             print("Sending Alert to Discord")
-            print("{:.2f}".format(price))
-            await channel.send('ALERTA DE LRC: %s' %price)
-            await send(price)
+            print("{:.2f}".format(price['LRC']))
+            await channel.send('ALERTA DE LRC: %s' %price['LRC'])
+            await send(price['LRC'])
             lrc_max = lrc_max + 0.10
             await asyncio.sleep(30) # task runs every 5 minutes
         else:
-            print("{:.2f}".format(price))
+            print("{:.2f}".format(price['LRC']))
 
         await asyncio.sleep(30) # task runs every 30 seconds
 
