@@ -34,9 +34,11 @@ async def my_background_task():
     channel = client.get_channel(811733009044733962)
     ada_min = 1.15
     ada_max = 3
+    lrc_min = 2
+    ada_max = 3
     while not client.is_closed():
         price = await get_price()
-        if price["ADA"] >= ada_max or price["ADA"] <= ada_min:
+        if price['ADA'] >= ada_max or price['ADA'] <= ada_min:
             print("Sending Alert to Discord")
             print("{:.2f}".format(price))
             await channel.send('ALERTA DE ADA: %s' %price)
@@ -45,6 +47,17 @@ async def my_background_task():
             await asyncio.sleep(30) # task runs every 5 minutes
         else:
             print("{:.2f}".format(price))
+
+        if price['LRC'] >= ada_max or price['LRC'] <= ada_min:
+            print("Sending Alert to Discord")
+            print("{:.2f}".format(price))
+            await channel.send('ALERTA DE LRC: %s' %price)
+            await send(price)
+            lrc_max = lrc_max + 0.10
+            await asyncio.sleep(30) # task runs every 5 minutes
+        else:
+            print("{:.2f}".format(price))
+
         await asyncio.sleep(30) # task runs every 30 seconds
 
 # Notifies when connection with Discord is established
@@ -60,11 +73,11 @@ async def on_message(message):
 
   if message.content == '!ADA' or message.content == '!cardas':
     price = await get_price()
-    await message.channel.send('Preço atual da ADA: %s' %price["ADA"])
+    await message.channel.send('Preço atual da ADA: %s' %price['ADA'])
 
   if message.content == '!LRC' or message.content == '!loopas':
     price = await get_price()
-    await message.channel.send('Preço atual do LRC: %s' %price["LRC"])
+    await message.channel.send('Preço atual do LRC: %s' %price['LRC'])
 
 client.loop.create_task(my_background_task())
 client.run(discord_token)
