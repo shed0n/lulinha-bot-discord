@@ -48,7 +48,7 @@ async def my_background_task():
         else:
             print("{:.2f}".format(price['ADA']))
 
-        if price['LRC'] >= ada_max or price['LRC'] <= ada_min:
+        if price['LRC'] >= lrc_max or price['LRC'] <= lrc_min:
             print("Sending Alert to Discord")
             print("{:.2f}".format(price['LRC']))
             await channel.send('ALERTA DE LRC: %s' %price['LRC'])
