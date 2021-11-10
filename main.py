@@ -71,11 +71,11 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-  if message.content == '!ADA' or message.content == '!cardas':
+  if message.content.tolower() == '!ada' or message.content.tolower() == '!cardas':
     price = await get_price()
     await message.channel.send('Preço atual da ADA: %s' %price['ADA'])
 
-  if message.content == '!LRC' or message.content == '!loopas':
+  if message.content.tolower() == '!LRC' or message.content.tolower() == '!loopas':
     price = await get_price()
     await message.channel.send('Preço atual do LRC: %s' %price['LRC'])
 
