@@ -15,13 +15,11 @@ client = discord.Client()
 # Gets the currently ADA Price from Binance
 async def get_price():
   response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
-  jsonRes = response.json()
+  jsonResADA = response.json()
   value_response = dict()
-  value_response.add("ADA",jsonRes['price'])
-  value = float(value_response)
   response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=LRCUSDT')
-  jsonRes = response.json()
-  value_response.add("LRC",jsonRes['price'])
+  jsonResLRC = response.json()
+  value_respnse = {'ADA':jsonResADA['price'],'LRC':jsonResLRC['price']}
   return(value_response)
 
 # Send message to a Telegram group
