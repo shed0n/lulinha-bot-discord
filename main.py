@@ -35,7 +35,7 @@ async def my_background_task():
     ada_min = 1.15
     ada_max = 3
     lrc_min = 2.50
-    lrc_max = 3
+    lrc_max = 5
     while not client.is_closed():
         price = await get_price()
         if price['ADA'] >= ada_max or price['ADA'] <= ada_min:
