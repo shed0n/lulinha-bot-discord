@@ -16,9 +16,12 @@ client = discord.Client()
 async def get_price():
   response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=ADAUSDT')
   jsonRes = response.json()
-  value_response = jsonRes['price']
+  value_response.add("ADA",jsonRes['price'])
   value = float(value_response)
-  return(value)
+  response = req.get('https://api.binance.com/api/v3/ticker/price?symbol=LRCUSDT')
+  jsonRes = response.json()
+  value_response.add("LRC",jsonRes['price'])
+  return(value_response)
 
 # Send message to a Telegram group
 async def send(price):
@@ -34,7 +37,7 @@ async def my_background_task():
     ada_max = 3
     while not client.is_closed():
         price = await get_price()
-        if price >= ada_max or price <= ada_min:
+        if price["ADA"] >= ada_max or price["ADA"] <= ada_min:
             print("Sending Alert to Discord")
             print("{:.2f}".format(price))
             await channel.send('ALERTA DE ADA: %s' %price)
@@ -56,9 +59,13 @@ async def on_message(message):
   if message.author == client.user:
     return
 
-  if message.content == '!preço' or message.content == '!preco':
+  if message.content == '!ADA' or message.content == '!cardas':
     price = await get_price()
-    await message.channel.send('Preço atual da ADA: %s' %price)
+    await message.channel.send('Preço atual da ADA: %s' %price["ADA"])
+
+  if message.content == '!LRC' or message.content == '!loopas':
+    price = await get_price()
+    await message.channel.send('Preço atual do LRC: %s' %price["LRC"])
 
 client.loop.create_task(my_background_task())
 client.run(discord_token)
