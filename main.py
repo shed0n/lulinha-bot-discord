@@ -34,8 +34,6 @@ async def my_background_task():
     channel = client.get_channel(811733009044733962)
     ada_min = 1.15
     ada_max = 3
-    lrc_min = 2.50
-    lrc_max = 5
     while not client.is_closed():
         price = await get_price()
         if price['ADA'] >= ada_max or price['ADA'] <= ada_min:
@@ -47,17 +45,6 @@ async def my_background_task():
             await asyncio.sleep(30) # task runs every 5 minutes
         else:
             print("{:.2f}".format(price['ADA']))
-
-        if price['LRC'] >= lrc_max or price['LRC'] <= lrc_min:
-            print("Sending Alert to Discord")
-            print("{:.2f}".format(price['LRC']))
-            await channel.send('ALERTA DE LRC: %s' %price['LRC'])
-            await send(price['LRC'])
-            lrc_max = lrc_max + 0.10
-            await asyncio.sleep(30) # task runs every 5 minutes
-        else:
-            print("{:.2f}".format(price['LRC']))
-
         await asyncio.sleep(30) # task runs every 30 seconds
 
 # Notifies when connection with Discord is established
