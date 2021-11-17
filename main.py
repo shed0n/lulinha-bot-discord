@@ -34,7 +34,7 @@ async def my_background_task():
     channel = client.get_channel(811733009044733962)
     ada_min = 1.15
     ada_max = 3
-    lrc_min = 2.50
+    lrc_min = 3.50
     lrc_max = 5
     while not client.is_closed():
         price = await get_price()
